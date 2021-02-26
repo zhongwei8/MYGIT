@@ -78,3 +78,26 @@ git push origin local_branch_name
 git branch -set-upstream local_branch_name origin/remote_branch_name
 
 ```
+
+# 5 文件删除
+## 5.1 删除本地文件
+```git
+git rm 文件名
+git rm -r 文件夹名
+```
+## 5.2 删除远程文件
+```git
+git rm --cached 文件(夹)名，此时只删除仓库中的缓存，时间文件不会删除
+git commit -m 'commit'
+git push origin 分支
+```
+```git
+上述 git commit -m '备注'之前不能使用git add .命令。因为用了命令相当于把第一步已删除的文件从新添加进入了暂存区，从而形成新的缓存。后面再使用gitcommit和git push，相当于删除缓存又重新添加缓存，文件仍然存在，提交的时候会提示已经是最新的
+```
+## 5.3 同时删除本地和远程文件
+```git
+git rm 文件名
+git rm -r 文件夹名
+git commit -m 'commit'
+git push origin 分支
+```
