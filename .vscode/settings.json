@@ -1,89 +1,112 @@
 {
-    "files.autoSave": "afterDelay",
-    "C_Cpp.clang_format_fallbackStyle": "Google",
-    "C_Cpp.clang_format_sortIncludes": true,
-    "C_Cpp.default.cStandard": "c99",
-    "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
-    "C_Cpp.default.cppStandard": "c++11",
-    "C_Cpp.loggingLevel": "Warning",
-    "files.trimTrailingWhitespace": true,
-    "python.languageServer": "Pylance",
+  "editor.fontSize": 14,
+  "editor.fontLigatures": true, // 启用连体字
+  "editor.fontWeight": "normal",
+  "editor.fontFamily": "Consolas, 'Courier New', 'monospace', monospace",
+  "editor.tabSize": 4,
+  "editor.tabCompletion": "on", // 出现推荐值时，按下 Tab 键自动填入最佳推荐值
+  "editor.codeActionsOnSave": { // 保存文件时，自动调整 import 顺序
+    "source.organizeImports": true
+  },
+  "editor.lineNumbers": "on", // 行号
+  "editor.formatOnType": false, // 控制编辑器是否应在键入后自动设置行的格式
+  "editor.renderFinalNewline": true,  // 自动添加最后一行空行
+  "editor.snippetSuggestions": "bottom",
+  "editor.suggest.snippetsPreventQuickSuggestions": true,
+  "editor.rulers": [79, 120],
 
-    "[python]": {
-        "editor.formatOnSave": true,
-        "editor.formatOnType": true,
-        "editor.wordBasedSuggestions": false,
-        "editor.tabSize": 4,
+  "files.insertFinalNewline": true, // 文末保持一行空行
+  "files.trimFinalNewlines": true,  // 删除行末空白字符
+  "files.trimTrailingWhitespace": true,
+  "files.autoSave": "afterDelay",
 
+  "C_Cpp.clang_format_fallbackStyle": "Google",
+  "C_Cpp.clang_format_sortIncludes": true,
+  "C_Cpp.default.cStandard": "c99",
+  "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
+  "C_Cpp.default.cppStandard": "c++11",
+  "C_Cpp.loggingLevel": "Warning",
+
+  "[c]":{
+    "editor.formatOnSave": true,
+    "editor.quickSuggestions": {
+      "other": true,
+      "comments": false,
+      "strings": false
     },
-    "python.analysis.completeFunctionParens": true,
-    "python.autoComplete.addBrackets": true,
-    "python.formatting.provider": "yapf",
-    "python.linting.flake8Enabled": true,
-    "python.linting.pylintEnabled": false,
-    "python.showStartPage": true,
-    "python.sortImports.args": [
-        "--force-sort-within-sections",
-        "--multi-line=0"],
-    "editor.rulers": [
-        80, 130
-    ],
+    "editor.tabSize": 2,
+    // "editor.wordBasedSuggestions": false,
+    // "editor.suggest.insertMode": "replace",
+    // "editor.semanticHighlighting.enabled": true,
+  },
+  "[cpp]": {
+    "editor.formatOnSave": true,
+    "editor.tabSize": 2,
+    // "editor.wordBasedSuggestions": false,
+    // "editor.suggest.insertMode": "replace",
+    // "editor.semanticHighlighting.enabled": true
+  },
 
-    "[c]":{
-        "editor.wordBasedSuggestions": false,
-        "editor.suggest.insertMode": "replace",
-        "editor.semanticHighlighting.enabled": true,
-        "editor.tabSize": 2
-    },
+  "[python]": {
+      "editor.formatOnSave": true,
+      "editor.formatOnType": true,
+      "editor.wordBasedSuggestions": false,
+      "editor.tabSize": 4,
+  },
 
-    "better-comments.tags": [
-        {
-          "tag": "!",
-          "color": "#FF2D00",
-          "strikethrough": false,
-          "underline": false,
-          "backgroundColor": "transparent",
-          "bold": false,
-          "italic": false
-        },
-        {
-          "tag": "?",
-          "color": "#3498DB",
-          "strikethrough": false,
-          "underline": false,
-          "backgroundColor": "transparent",
-          "bold": false,
-          "italic": false
-        },
-        {
-          "tag": "//",
-          "color": "#474747",
-          "strikethrough": true,
-          "underline": false,
-          "backgroundColor": "transparent",
-          "bold": false,
-          "italic": false
-        },
-        {
-          "tag": "todo",
-          "color": "#FF8C00",
-          "strikethrough": false,
-          "underline": false,
-          "backgroundColor": "transparent",
-          "bold": false,
-          "italic": false
-        },
-        {
-          "tag": "*",
-          "color": "#98C379",
-          "strikethrough": false,
-          "underline": false,
-          "backgroundColor": "transparent",
-          "bold": false,
-          "italic": false
-        }
-      ],
-      "editor.snippetSuggestions": "bottom",
-      "editor.suggest.snippetsPreventQuickSuggestions": false,
-      "python.pythonPath": "/home/mi/anaconda3/bin/python",
+  "python.languageServer": "Pylance",
+  "python.pythonPath": "/home/mi/anaconda3/bin/python",
+  "python.analysis.completeFunctionParens": true,
+  "python.autoComplete.addBrackets": true,
+  "python.formatting.provider": "yapf",
+  "python.linting.flake8Enabled": true,
+  "python.linting.pylintEnabled": false,
+  "python.showStartPage": true,
+  "python.sortImports.args": ["--force-sort-within-sections","--multi-line=0"],
+
+  "fileheader.customMade": {
+    "Author": "Tianzw",//自定义，作者名字（创建者）
+    "Date": "Do not edit", // 文件创建时间(不变)
+    "LastEditors": "", // 文件最后编辑者
+    "LastEditTime": "Do not edit", // 文件最后编辑时间
+    "FilePath": "Do not edit", // 增加此项配置即可
+  },
+
+  "fileheader.configObj": {
+  "wideSame": true, // 设置为true开启
+    "wideNum": 13 // 字段长度 默认为13
+  },
+
+  "fileheader.cursorMode": { // 函数注释
+    "method": "",
+    "param {Object} data": "",
+    "returns {String}": "",
+    "desc": ""
+  },
+
+  "workbench.iconTheme": "vscode-icons",  // 图标风格，插件 vscode-icons
+
+  "typescript.suggest.paths": false,  // 智能路径提示，插件 Path Intellisense
+  "path-intellisense.extensionOnImport": true,
+  "path-intellisense.showHiddenFiles": true,
+  "sync.gist": "f4e61cbf21bd0eaf7db89db643049923de5ce401",
+  "sync.autoUpload": false,
+  "sync.autoDownload": true,
+  "sync.quietSync": false,
+
+  "bracket-pair-colorizer-2.forceUniqueOpeningColor":true,
+  "bracket-pair-colorizer-2.forceIterationColorCycle":true,
+  "bracket-pair-colorizer-2.colorMode":"Consecutive",
+  "editor.matchBrackets":"always",
+  "bracket-pair-colorizer-2.highlightActiveScope":true,
+  "bracket-pair-colorizer-2.activeScopeCSS":[
+      "borderStyle : solid",
+      "borderWidth : 1px",
+      "borderColor : {color}; opacity: 0.5",
+      "backgroundColor:{color}"
+  ],
+  "bracket-pair-colorizer-2.showBracketsInGutter": true,
+  "bracket-pair-colorizer-2.showHorizontalScopeLine": false,
+  "bracket-pair-colorizer-2.showVerticalScopeLine": true,
+
 }
