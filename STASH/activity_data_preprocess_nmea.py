@@ -3,12 +3,9 @@
 # @Author: Farmer Li
 # @Date: 2021-01-04
 
-import multiprocessing as mp
 from pathlib import Path
 
 import click
-import matplotlib.pyplot as plt
-import numpy as np
 import pandas as pd
 
 NMEA_SUFFIX = 'nmea.csv'
