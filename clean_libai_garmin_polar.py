@@ -2,8 +2,8 @@
 Author       : Tianzw
 Date         : 2021-03-24 15:41:43
 LastEditors  : Please set LastEditors
-LastEditTime : 2021-03-25 17:10:59
-FilePath     : /my_github/clean_libai_garmin_polar.py
+LastEditTime : 2021-03-25 19:35:33
+FilePath     : /heart-health/src/py/tools/clean_libai_garmin_polar.py
 '''
 from pathlib import Path
 import shutil
@@ -14,19 +14,14 @@ LIBAI_FILE_SUFFIX = '.csv'
 GARMIN_FIT_SUFFIX = '.fit'
 POLAR_CSV_SUFFIX = '.csv'
 
-LIBAI_CLEAN = Path(
-    '/home/mi/data/new-sensor-bucket/libai/heartrate/libai_clean')
-
 LIBAI_FILE_PREFIX = 'libai_'
 GARMIN_FIT_PREFIX = 'garmin_'
 POLAR_CSV_PREFIX = 'polar_'
 
-LIBAI_CLEANED_DIR = Path(
-    '/home/mi/data/new-sensor-bucket/libai/heartrate/libai_cleaned')
-GARMIN_CLEANED_DIR = Path(
-    '/home/mi/data/new-sensor-bucket/libai/heartrate/garmin_cleaned')
-POLAR_CLEANED_DIR = Path(
-    '/home/mi/data/new-sensor-bucket/libai/heartrate/polar_cleaned')
+CLEANED_DIR = Path('/home/mi/data/new-sensor-bucket/libai/heartrate/cleaned')
+LIBAI_CLEANED_DIR = CLEANED_DIR / 'libai'
+GARMIN_CLEANED_DIR = CLEANED_DIR / 'garmin'
+POLAR_CLEANED_DIR = CLEANED_DIR / 'polar'
 
 
 def rename_and_clean_libai_record(source_dir: Path, target_dir: Path,
@@ -51,7 +46,7 @@ def rename_and_clean_libai_record(source_dir: Path, target_dir: Path,
         file_new_path = save_dir / file_new_name
         shutil.copyfile(file_path, file_new_path)
         print(f'Copy {file_path.name} to {file_new_path.name}')
-    print(f'Succeed: copy {source_dir} to {LIBAI_CLEAN}')
+    print(f'Succeed: copy {source_dir} to {LIBAI_CLEANED_DIR}')
 
 
 def rename_and_clean_garmin_fit(source_dir: Path, target_dir: Path,
@@ -89,7 +84,7 @@ def rename_and_clean_polar_csv(source_dir: Path, target_dir: Path,
         polar_csv_name = polar_csv_path.name
         polar_new_name = POLAR_CSV_PREFIX + polar_csv_name
 
-        polar_date_str = '.'.join(polar_csv_name.split('_')[1].split('-')[:3])
+        polar_date_str = '-'.join(polar_csv_name.split('_')[1].split('-')[:3])
 
         save_dir = target_dir / polar_date_str / tag
 
