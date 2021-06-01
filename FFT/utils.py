@@ -1,10 +1,14 @@
 from datetime import datetime, timedelta
 from pathlib import Path
 
+import PySimpleGUI as sg
 import click
 import fitparse
+from matplotlib import ticker
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+from scipy import signal
 
 LIBAI_PREFIX = 'libai_'
 LIFEQ_HEARTRATE_SUFFIX = '-heartrate-xHZ.csv'
@@ -13,9 +17,6 @@ ACC_PPG_MERGED_SUFFIX = '-accel-ppg-merged-52HZ.csv'
 POLAR_HEARTRATE_PATTERN = 'polar_*.csv'
 GARMIN_HEARTRATE_PATTERN = 'garmin_*.fit'
 GARMIN_UTC_OFFSET = timedelta(hours=8)
-
-from matplotlib import ticker
-import matplotlib.pyplot as plt
 
 
 class LibaiRecordUtils:
@@ -89,7 +90,7 @@ class LibaiRecordUtils:
         garmin_heartrate_file = self._get_garmin_heartrate_file()
 
         if garmin_heartrate_file is None or not garmin_heartrate_file.exists():
-            print(f'No garmin file in {self.libai_record.name}')
+            print(f'No garmin file in {self._libai_record.name}')
             return None
 
         garmin_heartrate_file = str(garmin_heartrate_file)
@@ -203,32 +204,3 @@ class LibaiRecordUtils:
             ax.xaxis.set_major_formatter(func)
 
         plt.show()
-
-
-def run(libai_record: Path):
-    libai_record = Path(libai_record)
-    libai_record_utils = LibaiRecordUtils(libai_record)
-    lifeq_heartrates = libai_record_utils.get_lifeq_heartrates()
-    garmin_heartrates = libai_record_utils.get_garmin_heartrates()
-    polar_heartrates = libai_record_utils.get_polar_heartrates()
-    ppg, acc = libai_record_utils.get_ppg_acc()
-
-    libai_record_utils.plot_polar_lifeq_garmin_ppg_acc()
-
-    print(f'lifeq_heartrates.shape = {lifeq_heartrates.shape}')
-    print(f'garmin_heartrates.shape = {garmin_heartrates.shape}')
-    print(f'polar_heartrates.shape = {polar_heartrates.shape}')
-    print(f'ppg.shape = {ppg.shape}')
-    print(f'acc.shape = {acc.shape}')
-
-    return
-
-
-@click.command()
-@click.argument('libai-record')
-def main(libai_record: str):
-    run(libai_record)
-
-
-if __name__ == '__main__':
-    main()

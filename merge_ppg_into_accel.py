@@ -2,8 +2,8 @@
 Author       : Tianzw
 Date         : 2021-03-25 09:46:20
 LastEditors  : Please set LastEditors
-LastEditTime : 2021-03-26 10:16:34
-FilePath     : /heart-health/src/py/tools/merge_ppg_into_accel.py
+LastEditTime : 2021-03-26 11:38:34
+FilePath     : /my_github/merge_ppg_into_accel.py
 '''
 from pathlib import Path
 
@@ -73,11 +73,13 @@ def read_accel_ppg_values(accel_path: Path, accel_header_line: int,
     return (accel_values, ppg_values)
 
 
-def preprocess_accel_ppg_values(accel: np.ndarray, ppg: np.ndarray) -> tuple:
+def unify_ns_of_accel_ppg_inplace(accel: np.ndarray, ppg: np.ndarray):
 
-    accel_ms_base, accel_ns_base = accel[0, 0], accel[0, 1]
-    ppg_ms_base, ppg_ns_base = ppg[0, 0], ppg[0, 1]
+    accel_ns_base = accel[0, 1]
+    ppg_ns_base = ppg[0, 1]
 
+    accel_ms_base = accel[0, 0]
+    ppg_ms_base = ppg[0, 0]
     ppg_lateness_ms = ppg_ms_base - accel_ms_base
     ppg_lateness_ns = ppg_lateness_ms * int(1e6)
 
@@ -86,32 +88,37 @@ def preprocess_accel_ppg_values(accel: np.ndarray, ppg: np.ndarray) -> tuple:
 
     ppg[:, 1] += ppg_lateness_ns
 
+
+def preprocess_accel_ppg_values(accel: np.ndarray, ppg: np.ndarray) -> tuple:
+    def unify_ns_of_accel_ppg(accel, ppg) -> None:
+        accel_ns_base = accel[0, 1]
+        ppg_ns_base = ppg[0, 1]
+
+        accel_ms_base = accel[0, 0]
+        ppg_ms_base = ppg[0, 0]
+        ppg_lateness_ms = ppg_ms_base - accel_ms_base
+        ppg_lateness_ns = ppg_lateness_ms * int(1e6)
+
+        accel[:, 1] -= accel_ns_base
+        ppg[:, 1] -= ppg_ns_base
+
+        ppg[:, 1] += ppg_lateness_ns
+
+    unify_ns_of_accel_ppg(accel, ppg)
+
     accel_start_ns, accel_stop_ns = accel[0, 1], accel[-1, 1]
     ppg_start_ns, ppg_stop_ns = ppg[0, 1], ppg[-1, 1]
 
     start_ns = max(accel_start_ns, ppg_start_ns)
     stop_ns = min(accel_stop_ns, ppg_stop_ns)
 
-    print(f'start_ns, stop_ns, seconds = '
-          f'{int(start_ns)}, {int(stop_ns)}, '
-          f'{int(stop_ns - start_ns) // int(1e9)}')
-
     accel_mask = (accel[:, 1] >= start_ns) & (accel[:, 1] <= stop_ns)
     ppg_mask = (ppg[:, 1] >= start_ns) & (ppg[:, 1] <= stop_ns)
 
-    accel_cliped = accel[accel_mask]
-    ppg_cliped = ppg[ppg_mask]
+    accel_cliped = accel[accel_mask]  # copy with index
+    ppg_cliped = ppg[ppg_mask]  # copy with index
 
-    print(f'accel_cliped_df.head() = \n'
-          f'{pd.DataFrame(accel_cliped, columns = ACCEL_HEADER).head()}')
-
-    print(f'ppg_cliped_df.head() = \n'
-          f'{pd.DataFrame(ppg_cliped, columns = PPG_HEADER).head()}')
-
-    print(f'accel_cliped.shape = {accel_cliped.shape}')
-    print(f'ppg_cliped.shape = {ppg_cliped.shape}')
-
-    return (accel_cliped, ppg_cliped)
+    return accel_cliped, ppg_cliped
 
 
 def merge_ppg_into_accel(ppg: np.ndarray, accel: np.ndarray) -> np.ndarray:

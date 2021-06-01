@@ -4,12 +4,11 @@
   "editor.fontWeight": "normal",
   "editor.fontFamily": "Consolas, 'Courier New', 'monospace', monospace",
   "editor.tabSize": 4,
-  "editor.tabCompletion": "on", // 出现推荐值时，按下 Tab 键自动填入最佳推荐值
+  "editor.tabCompletion": "onlySnippets", // 出现推荐值时，按下 Tab 键自动填入最佳推荐值
   "editor.codeActionsOnSave": { // 保存文件时，自动调整 import 顺序
     "source.organizeImports": true
   },
-  "editor.lineNumbers": "on", // 行号
-  "editor.formatOnType": false, // 控制编辑器是否应在键入后自动设置行的格式
+  "editor.lineNumbers": "on", // 控制编辑器是否应在键入后自动设置行的格式
   "editor.renderFinalNewline": true,  // 自动添加最后一行空行
   "editor.snippetSuggestions": "bottom",
   "editor.suggest.snippetsPreventQuickSuggestions": true,
@@ -18,8 +17,8 @@
   "files.insertFinalNewline": true, // 文末保持一行空行
   "files.trimFinalNewlines": true,  // 删除行末空白字符
   "files.trimTrailingWhitespace": true,
-  "files.autoSave": "afterDelay",
-
+  "files.autoSave": "onFocusChange",
+  "files.autoSaveDelay": 1000,
   "C_Cpp.clang_format_fallbackStyle": "Google",
   "C_Cpp.clang_format_sortIncludes": true,
   "C_Cpp.default.cStandard": "c99",
@@ -47,15 +46,16 @@
     // "editor.semanticHighlighting.enabled": true
   },
 
+
   "[python]": {
       "editor.formatOnSave": true,
-      "editor.formatOnType": true,
+      "editor.formatOnType": true, // 键入后自动设置行的格式，关闭
       "editor.wordBasedSuggestions": false,
       "editor.tabSize": 4,
   },
 
   "python.languageServer": "Pylance",
-  "python.pythonPath": "/home/mi/anaconda3/bin/python",
+  "python.pythonPath": "/usr/bin/python3.8",
   "python.analysis.completeFunctionParens": true,
   "python.autoComplete.addBrackets": true,
   "python.formatting.provider": "yapf",
@@ -108,5 +108,8 @@
   "bracket-pair-colorizer-2.showBracketsInGutter": true,
   "bracket-pair-colorizer-2.showHorizontalScopeLine": false,
   "bracket-pair-colorizer-2.showVerticalScopeLine": true,
+  "tabnine.experimentalAutoImports": true,
+  "hediet.vscode-drawio.local-storage": "eyIuZHJhd2lvLWNvbmZpZyI6IntcImxhbmd1YWdlXCI6XCJcIixcImN1c3RvbUZvbnRzXCI6W10sXCJsaWJyYXJpZXNcIjpcImdlbmVyYWxcIixcImN1c3RvbUxpYnJhcmllc1wiOltcIkwuc2NyYXRjaHBhZFwiXSxcInBsdWdpbnNcIjpbXSxcInJlY2VudENvbG9yc1wiOltdLFwiZm9ybWF0V2lkdGhcIjpcIjI0MFwiLFwiY3JlYXRlVGFyZ2V0XCI6ZmFsc2UsXCJwYWdlRm9ybWF0XCI6e1wieFwiOjAsXCJ5XCI6MCxcIndpZHRoXCI6ODI3LFwiaGVpZ2h0XCI6MTE2OX0sXCJzZWFyY2hcIjp0cnVlLFwic2hvd1N0YXJ0U2NyZWVuXCI6dHJ1ZSxcImdyaWRDb2xvclwiOlwiI2QwZDBkMFwiLFwiZGFya0dyaWRDb2xvclwiOlwiIzZlNmU2ZVwiLFwiYXV0b3NhdmVcIjp0cnVlLFwicmVzaXplSW1hZ2VzXCI6bnVsbCxcIm9wZW5Db3VudGVyXCI6MCxcInZlcnNpb25cIjoxOCxcInVuaXRcIjoxLFwiaXNSdWxlck9uXCI6ZmFsc2UsXCJ1aVwiOlwiXCJ9In0=",
+  // Ctrl + Shift + 2: 自动创建文档字符串。插件 Python Docstring Generator
 
 }
